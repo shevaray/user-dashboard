@@ -52,11 +52,11 @@ registerLocaleData(en);
     BrowserAnimationsModule,
   ],
   providers: [
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: HttpInterceptorService,
-    //   multi: true
-    // },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorService,
+      multi: true
+    },
     { provide: NZ_I18N, useValue: en_US }
   ],
   bootstrap: [AppComponent]

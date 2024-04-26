@@ -6,15 +6,17 @@ import {
   HttpInterceptor,
   HttpResponse
 } from '@angular/common/http';
-import { Observable, of, tap } from 'rxjs';
-import { CachableUrls } from '../config/cachable-urls.config';
+import { Observable, of, tap, toArray } from 'rxjs';
+import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable()
 export class HttpInterceptorService implements HttpInterceptor {
 
   cacheMap = new Map<string, HttpResponse<any>>();
+  cachableUrls: any[] = [];
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     if (!this.isRequestCachable(request)) {
@@ -26,7 +28,8 @@ export class HttpInterceptorService implements HttpInterceptor {
 
   isRequestCachable(req: HttpRequest<any>): boolean{
     if (req.method === 'GET') {
-      const urls = CachableUrls;
+      this.getParams()
+      const urls = this.cachableUrls;
 
       for (let i = 0; i < urls.length; i++) {
         if (req.url.toLowerCase() === urls[i].toLowerCase()) {
@@ -53,5 +56,17 @@ export class HttpInterceptorService implements HttpInterceptor {
         })
       )
     }
+  }
+
+  getParams() {
+    const url = environment.apiBaseUrl + this.router.url.slice(1,)
+    if (
+        this.cachableUrls.includes(url) ||
+        this.router.url.includes('/users?') ||
+        this.router.url.endsWith('/users')
+      ) {
+      return;
+    }
+    this.cachableUrls.push(url)
   }
 }

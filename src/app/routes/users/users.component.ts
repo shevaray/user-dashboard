@@ -115,7 +115,7 @@ export class UsersComponent implements OnInit {
     })
 
     this.userDetail$.subscribe((res) => {
-      this.users = [res];
+        this.users = [res];
     })
   }
 

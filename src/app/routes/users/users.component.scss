@@ -34,18 +34,16 @@
 }
 
 :host::ng-deep{
+  .ant-input,
   .ant-input-affix-wrapper {
     background: transparent;
     border-color: transparent;
     box-shadow: none;
-  }
-
-  .ant-input{
     color: #2f4459;
   }
 
   .ant-input::placeholder{
-    color: transparent;
+    color: #2f4459;
   }
 
   .ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover,

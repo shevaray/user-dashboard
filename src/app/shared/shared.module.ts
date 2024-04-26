@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NG_MATERIAL_MODULES } from './ng-material.module';
+import { NG_ZORRO_MODULES } from './shared-ng-zorro.module';
 
 
 
@@ -8,10 +8,10 @@ import { NG_MATERIAL_MODULES } from './ng-material.module';
   declarations: [],
   imports: [
     CommonModule,
-    ...NG_MATERIAL_MODULES
+    ...NG_ZORRO_MODULES
   ],
   exports: [
-    ...NG_MATERIAL_MODULES
+    ...NG_ZORRO_MODULES
   ]
 })
 export class SharedModule { }

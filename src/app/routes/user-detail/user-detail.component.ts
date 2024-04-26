@@ -4,8 +4,7 @@ import * as fromApp from '../../core/store/app/app.reducer'
 import * as fromUserDetail from '../../core/store/user-detail/user-detail.reducer'
 import * as fromUserDetailAction from '../../core/store/user-detail/user-detail.action'
 import * as fromUserDetailSelectors from '../../core/store/user-detail/user-detail.selector'
-import { ActivatedRoute } from '@angular/router';
-import { LocationStrategy } from '@angular/common';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -17,11 +16,12 @@ export class UserDetailComponent implements OnInit {
   userDetail$!: Observable<fromUserDetail.UserDetail>;
   isLoading$!: Observable<boolean>;
   errorResponse$!: Observable<string | null>;
+  userDetail: any;
 
   constructor(
     private store: Store<fromApp.AppState>,
     private route: ActivatedRoute,
-    private location: LocationStrategy
+    private router: Router,
   ){}
 
   ngOnInit(): void {
@@ -37,7 +37,7 @@ export class UserDetailComponent implements OnInit {
             return
           }
         }
-    })
+      });
   }
 
   getUserDetail(param: any) {
@@ -50,7 +50,7 @@ export class UserDetailComponent implements OnInit {
   }
 
   goBack() {
-    this.location.back();
+    this.router.navigate(['/users'])
   }
 
 }

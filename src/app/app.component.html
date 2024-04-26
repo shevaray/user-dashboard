@@ -1,2 +1,8 @@
 <ng-progress></ng-progress>
-<router-outlet></router-outlet>
+<main class="layout">
+  <div class="layout-header" nz-row [nzJustify]="'end'"></div>
+
+  <div class="layout-body">
+    <router-outlet></router-outlet>
+  </div>
+</main>

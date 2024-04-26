@@ -1,0 +1,30 @@
+.ant-table-thead > tr > th {
+  color: #7f8c9e;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1rem;
+  white-space: nowrap;
+}
+
+.ant-table-tbody > tr > td {
+  color: #9aa2af;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1rem;
+  white-space: nowrap;
+}
+
+.ant-table-footer{
+  display: flex;
+  justify-content: flex-end;
+  min-height: 4rem;
+}
+
+
+
+@media (width < 1024px) {
+  .ant-table {
+    overflow: scroll !important;
+    scroll-behavior: smooth !important;
+  }
+}

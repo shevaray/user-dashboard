@@ -20,8 +20,8 @@ export class UserService {
     )
   }
 
-  getUserByID(payload: any): Observable<UserDetail> {
-    return this.http.get<UserDetail>(
+  getUserByID(payload: any): Observable<{data: UserDetail}> {
+    return this.http.get<{ data: UserDetail }>(
       environment.apiBaseUrl + `${RestApiRoutes.users}/${payload.id}`
     )
   }

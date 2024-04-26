@@ -3,11 +3,11 @@ import * as userDetailActions from './user-detail.action';
 
 
 export interface UserDetail{
-  id: number,
-  email: string,
-  first_name: string,
-  last_name: string,
-  avatar: string
+  id: string | null,
+  email: string | null,
+  first_name: string | null,
+  last_name: string | null,
+  avatar: string | null
 }
 
 export interface State{
@@ -20,11 +20,11 @@ const initialState: State = {
   isLoading: false,
   error: null,
   data: {
-    id: 0,
+    id: "",
     email: "",
     first_name: "",
     last_name: "",
-    avatar: ""
+    avatar: "assets/avatar.webp"
   }
 }
 
@@ -44,7 +44,7 @@ const userDetailInternal = createReducer(initialState,
     error: message
   })),
 
-  on(userDetailActions.getUserByIDSuccess, (state, { data }) => ({
+  on(userDetailActions.getUserByIDSuccess, (state, {data}) => ({
     ...state,
     isLoading: false,
     data: data

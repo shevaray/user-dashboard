@@ -15,19 +15,29 @@ import { environment } from 'src/environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { UsersEffects } from './core/store/users/users.effect';
 import { UserDetailEffects } from './core/store/user-detail/user-detail.effect';
+import { NZ_I18N } from 'ng-zorro-antd/i18n';
+import { en_US } from 'ng-zorro-antd/i18n';
+import { registerLocaleData } from '@angular/common';
+import en from '@angular/common/locales/en';
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SharedModule } from './shared/shared.module';
+
+registerLocaleData(en);
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    SharedModule,
     NgProgressModule.withConfig({
       spinnerPosition: "left",
-      color: "#ed1c24",
+      color: "#c1e3dc",
     }),
     NgProgressHttpModule,
     StoreModule.forRoot(fromApp.appReducer, {
@@ -38,13 +48,16 @@ import { UserDetailEffects } from './core/store/user-detail/user-detail.effect';
       UsersEffects,
       UserDetailEffects,
     ]),
+    FormsModule,
+    BrowserAnimationsModule,
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: HttpInterceptorService,
-      multi: true
-    }
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: HttpInterceptorService,
+    //   multi: true
+    // },
+    { provide: NZ_I18N, useValue: en_US }
   ],
   bootstrap: [AppComponent]
 })

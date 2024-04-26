@@ -1,2 +1,58 @@
-<p>user-detail works!</p>
-<p *ngIf="isLoading$ | async"> Hello</p>
+<main class="user-detail-page-wrapper">
+    <div class="user-detail-page-title">
+      <h1>USER DETAIL</h1>
+    </div>
+
+    <div>
+      <div class="go-back-wrapper">
+        <div class="arrow-left-wrapper">
+          <span nz-icon nzType="arrow-left" nzTheme="outline"></span>
+        </div>
+
+        <a HoverCursorPointer class="go-back" (click)="goBack()">Back</a>
+      </div>
+
+      <div
+        class="user-detail-page-body"
+        nz-row [nzJustify]="'center'"
+        [nzAlign]="'middle'"
+      >
+        <div *ngIf="!(userDetail$ | async)?.first_name">
+          <nz-empty></nz-empty>
+        </div>
+
+
+        <div
+          class="user-detail-card"
+          *ngIf="(userDetail$ | async)?.first_name"
+          nz-col
+          [nzXs]="24"
+          [nzSm]="24"
+          [nzMd]="12"
+          [nzLg]="12"
+        >
+          <img
+            [src]="(userDetail$ | async)?.avatar"
+            alt="user" class="user-image"
+          />
+
+          <div class="user-detail" *ngIf="(userDetail$ | async)">
+            <p>
+              <span class="title">First Name: &nbsp;</span>
+              <span class="value">{{(userDetail$ | async)?.first_name}}</span>
+            </p>
+            <p>
+              <span class="title">Last Name: &nbsp;</span>
+              <span class="value">{{(userDetail$ | async)?.last_name}}</span>
+            </p>
+            <p>
+              <span class="title">Email: &nbsp;</span>
+              <span class="value">{{(userDetail$ | async)?.email}}</span>
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+</main>

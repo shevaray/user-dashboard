@@ -5,6 +5,8 @@ import { UsersRoutingModule } from './users-routing.module';
 import { UsersComponent } from './users.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { UserDetailComponent } from '../user-detail/user-detail.component';
+import { FormsModule } from '@angular/forms';
+import { DirectivesModule } from 'src/app/core/directives/directives.module';
 
 
 @NgModule({
@@ -14,7 +16,9 @@ import { UserDetailComponent } from '../user-detail/user-detail.component';
   imports: [
     CommonModule,
     UsersRoutingModule,
-    SharedModule
+    FormsModule,
+    SharedModule,
+    DirectivesModule
   ]
 })
 export class UsersModule { }

@@ -1,7 +1,90 @@
-<p>users works!</p>
+<main class="user-page-wrapper">
+  <div class="user-page-title">
+    <h1>USERS</h1>
 
-<p *ngFor="let user of users">
-  {{ user.email }}
-  {{ user.first_name }}
-</p>
+    <div
+      nz-col
+      [nzLg]="6"
+    >
+      <nz-input-group [nzSuffix]="suffixIconSearch">
+        <input
+          type="text"
+          nz-input
+          placeholder="input search text"
+          [(ngModel)]="searchValue"
+          userSearch
+          (enterKeyPressed)="search()"
+        />
+      </nz-input-group>
 
+      <ng-template #suffixIconSearch>
+        <span nz-icon nzType="search"></span>
+      </ng-template>
+    </div>
+  </div>
+
+  <div class="user-page-body">
+    <nz-table
+      #userTable
+      [nzData]="users"
+      [nzShowPagination]="false"
+      [nzFooter]="pagination"
+      [nzLoading]="isLoading$ | async"
+      [nzPageSize]="pageSize"
+    >
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+
+    <tbody>
+      <tr *ngFor="let data of userTable.data">
+        <td>
+          <span
+            class="cursor-pointer"
+            routerLink="{{ '/users/' + data.id }}"
+          >
+            {{data.first_name}} {{data.last_name}}
+          </span>
+        </td>
+        <td>{{data.email}}</td>
+        <td>
+          <a class="view-user" (click)="viewUserDetail(data.id)">view</a>
+        </td>
+      </tr>
+    </tbody>
+    </nz-table>
+
+    <ng-template #pagination class="ant-table-footer">
+      <div class="text-right" [ngClass]="!this.users.length ? 'display-none' : ''">
+        <nz-pagination
+          nzShowSizeChanger
+          [nzPageIndex]="currentPage"
+          [nzItemRender]="renderUserTableTemplate"
+          [nzShowTotal]="rangeTemplate"
+          [nzPageSize]="pageSize"
+          [nzPageSizeOptions]="pageSizeOptions"
+          [nzTotal]="total"
+          [nzResponsive]="true"
+          (nzPageSizeChange)="onSelectPageSize($event)"
+        ></nz-pagination>
+
+        <ng-template #renderUserTableTemplate let-type let-page="page">
+          <ng-container [ngSwitch]="type">
+            <a *ngSwitchCase="'page'" (click)="onSelectPage(page)">{{
+              page
+            }}</a>
+          </ng-container>
+        </ng-template>
+
+        <ng-template #rangeTemplate let-total>
+          {{ from + 1 }}-{{ to > total ? total : to }} of {{ total }} items
+        </ng-template>
+      </div>
+    </ng-template>
+
+  </div>
+</main>

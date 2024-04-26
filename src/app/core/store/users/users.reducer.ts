@@ -48,7 +48,6 @@ const usersReducerInternal = createReducer(initialState,
     isLoading: false,
     data: data
   })),
-
 );
 
 export function usersReducer(state: State | undefined, action: Action) {

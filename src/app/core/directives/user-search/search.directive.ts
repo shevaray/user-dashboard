@@ -14,4 +14,10 @@ export class UserSearchDirective {
     this.enterKeyPressed.emit(); // Emit an event when the Enter key is pressed
   }
 
+  @HostListener('keyup', ['$event'])
+  onKeyUp(event: KeyboardEvent) {
+    event.preventDefault(); // Prevent the default action of the Enter key
+    this.enterKeyPressed.emit(); // Emit an event when the Enter key is pressed
+  }
+
 }

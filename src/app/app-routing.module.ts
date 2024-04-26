@@ -19,7 +19,7 @@ const routes: Routes = [
   },
   {
     path: "**",
-    redirectTo: "users",
+    redirectTo: "",
     pathMatch: 'full'
   }
 ];
